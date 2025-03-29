@@ -1,27 +1,25 @@
-import speech_recognition as sp  # Sesin text formatına çevirmek için kullanacağız.
-
+import speech_recognition as sp 
 
 def ses_tanima():
-    tanimlayici = sp.Recognizer()  # Seslerin yazıya dönüştürülmesi için tanımlamasını sağlar.
+    tanimlayici = sp.Recognizer()
 
-    # Mikrofonu sürekli dinle
     with sp.Microphone() as mic:
         print("Sesli Komut Bekleniyor... (Durdurmak için Ctrl+C tuşlayın)")
 
         while True:
             try:
-                ses = tanimlayici.listen(mic)  # Mikrofonu dinlemeye başlar.
-                komut = tanimlayici.recognize_google(ses, language="tr")  # Google API ile sesli komutları tanır.
-                print(f"KOMUT : {komut}")  # Tanınan komutları yazdırır.
+                ses = tanimlayici.listen(mic) 
+                komut = tanimlayici.recognize_google(ses, language="tr")
+                print(f"KOMUT : {komut}")
 
             except sp.UnknownValueError:
-                print("Anlaşılamayan Ses!")  # Tanınamayan ses hatası.
+                print("Anlaşılamayan Ses!") 
             except sp.RequestError:
-                print("API ile bağlantı sağlanamadı!")  # Google API bağlantı hatası.
+                print("API ile bağlantı sağlanamadı!") 
 
 
 if __name__ == "__main__":
     try:
-        ses_tanima()  # Sesli komutları sürekli tanımaya başlıyoruz.
+        ses_tanima() 
     except KeyboardInterrupt:
-        print("\nProgram durduruldu.")  # Ctrl+C ile durdurulduğunda mesaj verilir.
+        print("\nProgram durduruldu.") 
